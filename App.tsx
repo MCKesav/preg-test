@@ -6,6 +6,7 @@ import PartnerDashboard from './components/PartnerDashboard';
 import FamilyDashboard from './components/FamilyDashboard';
 import DoctorDashboard from './components/DoctorDashboard';
 import NutritionIntelligence from './components/NutritionIntelligence';
+import ChatBot from './components/ChatBot';
 import { UserRole, PregnancyPhase } from './types';
 import { Apple, Calendar, Activity, Baby, HeartPulse } from 'lucide-react';
 
@@ -116,6 +117,9 @@ const App: React.FC = () => {
       <div className="animate-in fade-in duration-700">
         {renderDashboard()}
       </div>
+
+      {/* ChatBot - Available on all views */}
+      <ChatBot phase={activePhase} />
     </Layout>
   );
 };
