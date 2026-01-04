@@ -1,0 +1,10 @@
+{
+  "name": "NurtureNet - Unified Pregnancy Care",
+  "description": "A collaborative platform connecting mothers, partners, family, and doctors for a healthier, coordinated pregnancy journey with AI-powered nutrition and health tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "bluetooth",
+    "geolocation"
+  ]
+}
