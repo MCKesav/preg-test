@@ -153,7 +153,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
 
   const toggleListening = () => {
     if (!recognitionRef.current) {
-      alert('Speech recognition is not supported in your browser.');
+      alert('Speech recognition is not supported in your browser. Please use Chrome, Edge, or Safari.');
       return;
     }
 
@@ -161,12 +161,21 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
       recognitionRef.current.stop();
       setIsListening(false);
     } else {
-      try {
-        recognitionRef.current.start();
-        setIsListening(true);
-      } catch (error) {
-        console.error('Failed to start speech recognition:', error);
-      }
+      // Request microphone permission explicitly
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(() => {
+          try {
+            recognitionRef.current?.start();
+            setIsListening(true);
+          } catch (error) {
+            console.error('Failed to start speech recognition:', error);
+            alert('Failed to start voice input. Please try again.');
+          }
+        })
+        .catch((err) => {
+          console.error('Microphone permission denied:', err);
+          alert('Microphone access denied. Please allow microphone permission in your browser settings.');
+        });
     }
   };
 
@@ -204,7 +213,9 @@ ${conversationHistory}
 
 User: ${trimmedInput}
 
-Please respond helpfully:`;
+IMPORTANT: Detect the language of the user's message above and respond ENTIRELY in that same language. If user wrote in Telugu, respond in Telugu. If Hindi, respond in Hindi. If English, respond in English. Match the user's language exactly.
+
+Please respond helpfully in the SAME LANGUAGE as the user's message:`;
 
       const response = await ai.models.generateContent({
         model: 'gemini-flash-lite-latest',
@@ -277,10 +288,11 @@ Please respond helpfully:`;
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-white/20 rounded-full transition-colors"
+            className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors flex items-center gap-1"
             aria-label="Close chat"
           >
             <X className="w-5 h-5" />
+            <span className="text-sm font-medium">Close</span>
           </button>
         </div>
 

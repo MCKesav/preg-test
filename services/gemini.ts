@@ -7,7 +7,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 export const getNutritionAdvice = async (trimester: number, condition: string = "None") => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-lite-latest",
       contents: `Provide a daily meal plan for a pregnant woman in trimester ${trimester} with medical condition: ${condition}. Focus on Indian cuisine, high protein, and folic acid. Return 3 meals and 2 snacks.`,
       config: {
         responseMimeType: "application/json",
@@ -36,7 +36,7 @@ export const getNutritionAdvice = async (trimester: number, condition: string = 
 export const getBabyInsight = async (week: number) => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-lite-latest",
       contents: `Give me 3 short, encouraging facts about a baby's development at week ${week}.`,
     });
     // Fix: Using the .text property directly.
