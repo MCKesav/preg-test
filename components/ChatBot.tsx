@@ -74,6 +74,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const shouldKeepListeningRef = useRef(false);
 
   const colors = phaseColors[phase];
 
@@ -106,38 +107,45 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
   // Initialize Speech Recognition
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
+      const SpeechRecognitionAPI = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognitionAPI) {
+        const recognition = new SpeechRecognitionAPI();
+        recognition.continuous = false;
+        recognition.interimResults = false;
         recognition.lang = 'en-US';
 
-        recognition.onresult = (event: SpeechRecognitionEvent) => {
-          let finalTranscript = '';
-          let interimTranscript = '';
-
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            const result = event.results[i];
-            if (result.isFinal) {
-              finalTranscript += result[0].transcript;
-            } else {
-              interimTranscript += result[0].transcript;
-            }
-          }
-
-          if (finalTranscript) {
-            setInputValue(prev => prev + finalTranscript + ' ');
-          }
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          console.log('Transcript:', transcript);
+          setInputValue(prev => prev + transcript + ' ');
         };
 
-        recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+        recognition.onerror = (event: any) => {
           console.error('Speech recognition error:', event.error);
-          setIsListening(false);
+          if (event.error !== 'no-speech') {
+            shouldKeepListeningRef.current = false;
+            setIsListening(false);
+          }
         };
 
         recognition.onend = () => {
-          setIsListening(false);
+          console.log('Speech recognition ended');
+          // Restart if user wants to keep listening
+          if (shouldKeepListeningRef.current && recognitionRef.current) {
+            try {
+              setTimeout(() => {
+                if (shouldKeepListeningRef.current) {
+                  recognitionRef.current?.start();
+                }
+              }, 100);
+            } catch (error) {
+              console.error('Failed to restart recognition:', error);
+              shouldKeepListeningRef.current = false;
+              setIsListening(false);
+            }
+          } else {
+            setIsListening(false);
+          }
         };
 
         recognitionRef.current = recognition;
@@ -145,8 +153,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
     }
 
     return () => {
+      shouldKeepListeningRef.current = false;
       if (recognitionRef.current) {
-        recognitionRef.current.abort();
+        try {
+          recognitionRef.current.abort();
+        } catch (e) {}
       }
     };
   }, []);
@@ -158,17 +169,25 @@ const ChatBot: React.FC<ChatBotProps> = ({ phase }) => {
     }
 
     if (isListening) {
-      recognitionRef.current.stop();
+      shouldKeepListeningRef.current = false;
+      try {
+        recognitionRef.current.stop();
+      } catch (e) {}
       setIsListening(false);
     } else {
       // Request microphone permission explicitly
       navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(() => {
+        .then((stream) => {
+          // Stop the stream immediately, we just needed permission
+          stream.getTracks().forEach(track => track.stop());
+          
           try {
+            shouldKeepListeningRef.current = true;
             recognitionRef.current?.start();
             setIsListening(true);
           } catch (error) {
             console.error('Failed to start speech recognition:', error);
+            shouldKeepListeningRef.current = false;
             alert('Failed to start voice input. Please try again.');
           }
         })
