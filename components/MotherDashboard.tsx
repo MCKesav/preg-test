@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { 
-  Activity, Droplets, Scale, Heart, Wind, Brain, ShieldCheck, 
-  Moon, Volume2, Stethoscope, ClipboardList, CheckCircle2 
+import {
+  Activity, Droplets, Scale, Heart, Wind, Brain, ShieldCheck,
+  Moon, Volume2, Stethoscope, ClipboardList, CheckCircle2
 } from 'lucide-react';
 import VitalsChart from './VitalsChart';
 import JourneyTimeline from './JourneyTimeline';
@@ -28,7 +28,7 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
   const currentWeek = 24;
   const [activeVital, setActiveVital] = useState<VitalType>('STRESS');
   const [isDeviceConnected, setIsDeviceConnected] = useState(false);
-  
+
   // Real-time data states
   const [vitals, setVitals] = useState({
     hr: 73,
@@ -127,10 +127,10 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
                         "Continue prenatal yoga but avoid deep pelvic stretches."
                       ].map((item, idx) => (
                         <div key={idx} className="flex gap-3 p-3 bg-white/80 rounded-2xl border border-slate-100 shadow-sm transition-all hover:bg-rose-50 group">
-                           <div className="w-6 h-6 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                              <CheckCircle2 className="w-3.5 h-3.5" />
-                           </div>
-                           <p className="text-[11px] font-bold text-slate-700 leading-tight">{item}</p>
+                          <div className="w-6 h-6 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                          </div>
+                          <p className="text-[11px] font-bold text-slate-700 leading-tight">{item}</p>
                         </div>
                       ))}
                     </div>
@@ -147,7 +147,7 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
                     </div>
                     Live Vitals
                   </h2>
-                  
+
                   {isDeviceConnected ? (
                     <div className="flex items-center gap-3 px-3 py-1.5 bg-emerald-50 rounded-full border border-emerald-100 transition-all">
                       <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -160,11 +160,11 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 mb-10">
                   {statItems.map((stat) => (
-                    <button 
-                      key={stat.id} 
+                    <button
+                      key={stat.id}
                       onClick={() => setActiveVital(stat.id as VitalType)}
                       className={`${stat.bg} p-3 rounded-[1.5rem] text-center border transition-all hover:scale-105 active:scale-95 ${activeVital === stat.id ? `${stat.activeBorder} shadow-lg ring-2 ring-white/50` : 'border-white/40 shadow-sm'}`}
                     >
@@ -185,8 +185,8 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
 
             {/* Right Column: Actions & Device Sync */}
             <div className="space-y-8">
-              <DeviceSync 
-                onSyncComplete={handleSyncComplete} 
+              <DeviceSync
+                onSyncComplete={handleSyncComplete}
                 onStatusChange={(connected) => setIsDeviceConnected(connected)}
               />
 
@@ -227,7 +227,7 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
                     </button>
                   ))}
                 </div>
-                <textarea 
+                <textarea
                   placeholder="Notes for today..."
                   className="w-full p-5 bg-white/40 border-2 border-transparent focus:border-rose-200 rounded-[2rem] text-sm font-medium h-28 focus:ring-0 outline-none transition-all placeholder:text-slate-400"
                 ></textarea>
@@ -243,18 +243,20 @@ const MotherDashboard: React.FC<MotherDashboardProps> = ({ phase }) => {
       {renderPhaseContent()}
 
       {/* Persistent Planning Card - Visible in all 4 tabs */}
-      <section className="surface-card p-10 rounded-[2.5rem] text-center max-w-3xl mx-auto border-dashed border-2 border-rose-200 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-        <h2 className="text-2xl font-serif font-bold text-slate-800 mb-4">Planning Your Journey</h2>
-        <p className="text-slate-600 leading-relaxed mb-6">
-          Explore the timeline above to understand the 9-month transformation. Pre-pregnancy awareness involves folate intake, health screening, and understanding your biological cycle.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="px-6 py-3 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-100 hover:scale-105 transition-transform active:scale-95">
-            Schedule Pre-conception Visit
-          </button>
-          <button className="px-6 py-3 bg-white border border-rose-100 text-rose-600 rounded-2xl font-bold hover:bg-rose-50 transition-colors">
-            Download Planning Guide
-          </button>
+      <section className="relative z-0 bg-white/80 backdrop-blur-md p-10 rounded-[2.5rem] text-center border-2 border-dashed border-rose-200 shadow-lg animate-in fade-in slide-in-from-bottom-8 duration-1000 overflow-hidden">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-2xl font-serif font-bold text-slate-800 mb-4">Planning Your Journey</h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            Explore the timeline above to understand the 9-month transformation. Pre-pregnancy awareness involves folate intake, health screening, and understanding your biological cycle.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button className="px-6 py-3 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-100 hover:scale-105 transition-transform active:scale-95">
+              Schedule Pre-conception Visit
+            </button>
+            <button className="px-6 py-3 bg-white border border-rose-100 text-rose-600 rounded-2xl font-bold hover:bg-rose-50 transition-colors">
+              Download Planning Guide
+            </button>
+          </div>
         </div>
       </section>
     </div>

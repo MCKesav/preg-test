@@ -45,7 +45,7 @@ export const PREGNANCY_JOURNEY_DATA = [
     symptoms: "Hormonal changes may cause nausea and fatigue.",
     tips: "Rest and proper nutrition are important. Start Folic Acid.",
     visualPrompt: "small C-shaped embryo, very early stage, heart and neural tube forming",
-    staticImage: "https://uploads.onecompiler.io/449hhnqm6/449hhnyef/IMG-20260103-WA0021.jpg"
+    staticImage: "/images/fetal-growth/1.jpg"
   },
   {
     month: 2,
@@ -53,7 +53,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "The heart begins to beat. Limb buds, fingers, and toes start developing as the tail disappears.",
     symptoms: "Continued morning sickness and frequent urination.",
     tips: "Eat small, frequent meals to settle your stomach.",
-    visualPrompt: "fetus with visible limb buds, developing facial features, slightly larger than month 1"
+    visualPrompt: "fetus with visible limb buds, developing facial features, slightly larger than month 1",
+    staticImage: "/images/fetal-growth/2.jpg"
   },
   {
     month: 3,
@@ -61,7 +62,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "Movement begins. All organs are present, and the head is about 50% of the body length.",
     symptoms: "Mood swings are common. You may notice a small 'bump'.",
     tips: "Transition to comfortable maternity clothing.",
-    visualPrompt: "fully formed human fetus, fingers and toes defined, large head compared to body"
+    visualPrompt: "fully formed human fetus, fingers and toes defined, large head compared to body",
+    staticImage: "/images/fetal-growth/3.jpg"
   },
   {
     month: 4,
@@ -69,7 +71,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "The baby can now swallow. Skeletal structure is visible and floating freely.",
     symptoms: "Energy often returns. 'The mask of pregnancy' may appear.",
     tips: "Stay moisturized as your skin begins to stretch.",
-    visualPrompt: "fetus moving freely, skeleton beginning to harden, skin is thin and transparent"
+    visualPrompt: "fetus moving freely, skeleton beginning to harden, skin is thin and transparent",
+    staticImage: "/images/fetal-growth/4.jpg"
   },
   {
     month: 5,
@@ -77,7 +80,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "You’ll likely feel first kicks. Hearing develops and fine hair (lanugo) begins.",
     symptoms: "Backaches and leg cramps may occur.",
     tips: "Practice gentle prenatal yoga for back support.",
-    visualPrompt: "fetus with fine hair, sucking thumb, active movement in the uterus"
+    visualPrompt: "fetus with fine hair, sucking thumb, active movement in the uterus",
+    staticImage: "/images/fetal-growth/5.jpg"
   },
   {
     month: 6,
@@ -85,7 +89,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "Baby's eyes can open and blink. Lungs continue maturing. Posture becomes curled.",
     symptoms: "Increased appetite and occasional heartburn.",
     tips: "Try side-sleeping with a pregnancy pillow.",
-    visualPrompt: "fetus with eyes beginning to open, wrinkled skin, lungs developing branches"
+    visualPrompt: "fetus with eyes beginning to open, wrinkled skin, lungs developing branches",
+    staticImage: "/images/fetal-growth/6.jpg"
   },
   {
     month: 7,
@@ -93,7 +98,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "Brain development is fast. Baby practices breathing and gains fat deposits.",
     symptoms: "Feeling heavy; Braxton Hicks contractions may start.",
     tips: "Attend prenatal classes and finalize birth plans.",
-    visualPrompt: "larger fetus, rhythmic breathing movements, responding to light and sound"
+    visualPrompt: "larger fetus, rhythmic breathing movements, responding to light and sound",
+    staticImage: "/images/fetal-growth/7.jpg"
   },
   {
     month: 8,
@@ -101,7 +107,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "Baby gains weight quickly. Space is tight, and movement feels like pokes.",
     symptoms: "Shortness of breath as baby nears the ribs.",
     tips: "Pack your hospital bag and finish the nursery.",
-    visualPrompt: "fully developed fetus in head-down position, cramped space in uterus"
+    visualPrompt: "fully developed fetus in head-down position, cramped space in uterus",
+    staticImage: "/images/fetal-growth/8.jpg"
   },
   {
     month: 9,
@@ -109,7 +116,8 @@ export const PREGNANCY_JOURNEY_DATA = [
     highlights: "Lungs are mature. Baby drops into the pelvis (engagement) for birth.",
     symptoms: "Increased pelvic pressure and nesting instinct.",
     tips: "Rest as much as possible and enjoy the final days.",
-    visualPrompt: "mature newborn-sized baby, engaged in pelvis, ready for birth"
+    visualPrompt: "mature newborn-sized baby, engaged in pelvis, ready for birth",
+    staticImage: "/images/fetal-growth/9.jpg"
   }
 ];
 
